@@ -1,7 +1,7 @@
 # Sistema-Tunomatico
 
 
-📌 Descripción General del Sistema
+**📌 Descripción General del Sistema**
 
 El sistema Tunomatico es una solucion digital orientada a la gestion de turnos para usuarios que requieren atencion en servicios publicos o privados.
 Su objetivo personal es automatizar la asignacion de numeros de atencion, asi facilitando la organizacion y eliminando tiempos de espera presenciales 
