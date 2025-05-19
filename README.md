@@ -28,8 +28,8 @@ A su vez, el caso "Cancelar turno" extiende a "Notificar usuario", lo que implic
 
 El administrador tiene acceso a:
     - Administrar disponibilidad, gestionando los horarios y cupos disponibles.
-    - Este caso incluye (<<include>>) a "Ver todos los turnos", ya que para gestionar la agenda, el administrador necesita consultar los turnos previamente asignados.
+    - Este caso incluye (include) a "Ver todos los turnos", ya que para gestionar la agenda, el administrador necesita consultar los turnos previamente asignados.
 
-El sistema de notificaciones interactúa mediante el caso de uso "Notificar usuario", el cual también está modelado como una extensión (<<extend>>) del proceso de cancelación, ya que se invoca solo en ciertos escenarios, como al anular un turno.
+El sistema de notificaciones interactúa mediante el caso de uso "Notificar usuario", el cual también está modelado como una extensión (extend) del proceso de cancelación, ya que se invoca solo en ciertos escenarios, como al anular un turno.
 
-Este modelo permite reflejar la lógica condicional y reutilizable del sistema, empleando correctamente relaciones extend para acciones opcionales y <include> para acciones obligatorias compartidas por múltiples casos de uso.
+Este modelo permite reflejar la lógica condicional y reutilizable del sistema, empleando correctamente relaciones extend para acciones opcionales y include para acciones obligatorias compartidas por múltiples casos de uso.
