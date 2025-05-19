@@ -96,3 +96,22 @@ Las clases más importantes representadas son:
 
 ---
 
+### 🔧 Justificación de Patrones Aplicados
+
+#### 🔹 `Singleton` – Clase ControladorTurnos
+Se aplica para garantizar que exista **una única instancia** que gestione toda la lógica de turnos del sistema.  
+Esto evita duplicación de lógica y asegura consistencia global.
+
+#### 🔹 `Prototype` – Clase Turno
+El patrón Prototype permite **clonar turnos existentes**, útil si un usuario desea reprogramar o repetir un número previamente asignado.
+
+#### 🔹 `Adapter` – Clase NotificaciónAdapter
+Este adaptador sirve como **puente entre el sistema interno y un servicio externo** (como una API de llamadas o correos).  
+Permite integrar funcionalidades externas sin acoplarse directamente a su implementación.
+
+#### 🔹 `Bridge` – Clases Notificación / NotificaciónEmail / NotificaciónLlamada
+Se utiliza para **desacoplar la abstracción de la notificación** (`Notificación`) de sus implementaciones (`Email`, `Llamada`).  
+Esto permite agregar nuevos tipos de notificación sin modificar la lógica central del sistema.
+
+---
+
