@@ -47,12 +47,25 @@ aqui va la imagen
     - Ver el estado de su turno, para confirmar si sigue vigente o ha sido modificado.
     - Cancelar un turno, lo cual está modelado como una extensión (<<extend>>) del caso "Solicitar turno", ya que cancelar es una opción posterior o alternativa dentro del flujo de turnos.
     
-A su vez, el caso "Cancelar turno" extiende a "Notificar usuario", lo que implica que cuando se cancela un turno, opcionalmente se activa la acción de enviar una notificación al usuario.
+📌 El caso **"Cancelar turno"** extiende a **"Notificar usuario"**, indicando que al cancelar un turno, se puede enviar automáticamente una notificación al usuario.
+
+---
+
+### 👨‍💼 Administrador
 
 El administrador tiene acceso a:
+
     - Administrar disponibilidad, gestionando los horarios y cupos disponibles.
     - Este caso incluye (include) a "Ver todos los turnos", ya que para gestionar la agenda, el administrador necesita consultar los turnos previamente asignados.
 
-El sistema de notificaciones interactúa mediante el caso de uso "Notificar usuario", el cual también está modelado como una extensión (extend) del proceso de cancelación, ya que se invoca solo en ciertos escenarios, como al anular un turno.
+---
 
-Este modelo permite reflejar la lógica condicional y reutilizable del sistema, empleando correctamente relaciones extend para acciones opcionales y include para acciones obligatorias compartidas por múltiples casos de uso.
+### 🔔 Sistema de Notificaciones
+
+- El sistema externo participa en el caso de uso **"Notificar usuario"**  
+- Este caso está modelado como una **extensión** (`<<extend>>`) del proceso de cancelación, ya que solo se invoca en ciertos escenarios (por ejemplo, al anular un turno)
+
+---
+
+✅ **Conclusión**: Este modelo refleja de forma clara la lógica condicional y reutilizable del sistema, mediante relaciones `<<extend>>` para acciones opcionales y `<<include>>` para acciones obligatorias reutilizables.
+
