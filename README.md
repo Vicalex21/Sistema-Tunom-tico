@@ -69,3 +69,30 @@ El administrador tiene acceso a:
 
 ✅ **Conclusión**: Este modelo refleja de forma clara la lógica condicional y reutilizable del sistema, mediante relaciones `<<extend>>` para acciones opcionales y `<<include>>` para acciones obligatorias reutilizables.
 
+
+## 🧩 Diagrama de Clases UML
+
+
+🖼️ **Aquí debes insertar la imagen del diagrama de clases UML**  
+ *(Nombre del archivo sugerido: `diagrama_clases_tunomatico.png`)*
+
+---
+
+### 🧠 Descripción General del Diagrama
+
+El siguiente diagrama muestra la estructura interna del sistema Tunomático, detallando las clases principales, sus atributos, métodos y relaciones.
+
+El sistema fue diseñado aplicando principios de **orientación a objetos** y empleando los siguientes **patrones de diseño**: `Singleton`, `Prototype`, `Adapter` y `Bridge`.
+
+Las clases más importantes representadas son:
+
+- **Usuario**: contiene los datos básicos del usuario que solicita un turno.
+- **Turno**: representa un número de atención asociado a un usuario.
+- **Agenda**: mantiene la disponibilidad horaria del sistema.
+- **ControladorTurnos**: clase central que administra la creación y cancelación de turnos.
+- **Notificación**: clase abstracta para el envío de notificaciones.
+- **NotificaciónEmail / NotificaciónLlamada**: implementaciones concretas del sistema de notificación.
+- **NotificaciónAdapter**: adapta servicios externos de notificación.
+
+---
+
