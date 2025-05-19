@@ -23,14 +23,13 @@ Esto asegura una estructura escalable, mantenible y fácilmente integrable con o
 
 ---
 
-aqui va la imagen
 
-## 📌 Diagrama de Casos de Uso
+## 🎯 Diagrama de Casos de Uso
 
-> 📷 *[Aquí debe insertarse la imagen del diagrama de casos de uso]*
+![Caso de uso (1) drawio](https://github.com/user-attachments/assets/2a734186-e9d4-430f-ba85-976ac52151a7)
+
 
 ---
-
 ## 🧠 Descripción y Justificación del Diagrama de Casos de Uso
 
 ### 👥 Actores principales
@@ -70,11 +69,13 @@ El administrador tiene acceso a:
 ✅ **Conclusión**: Este modelo refleja de forma clara la lógica condicional y reutilizable del sistema, mediante relaciones `<<extend>>` para acciones opcionales y `<<include>>` para acciones obligatorias reutilizables.
 
 
+---
+
+
 ## 🧩 Diagrama de Clases UML
 
+![diagrama de clases drawio (2)](https://github.com/user-attachments/assets/01a77d5e-4da8-42f3-8ab7-b87b9d0183db)
 
-🖼️ **Aquí debes insertar la imagen del diagrama de clases UML**  
- *(Nombre del archivo sugerido: `diagrama_clases_tunomatico.png`)*
 
 ---
 
@@ -117,3 +118,77 @@ Esto permite agregar nuevos tipos de notificación sin modificar la lógica cent
 
 > ✅ **Conclusión**: El diseño del sistema refleja una arquitectura profesional, reutilizable y mantenible, con uso efectivo de patrones de diseño clásicos.
 
+## 🏗️ Diagrama de Implementación UML
+
+> 🖼️ **Aquí debes insertar la imagen final del diagrama de implementación**  
+> *(Ejemplo: `diagrama_implementacion_final.png`)*
+
+---
+
+### 🧱 Arquitectura Física del Sistema
+
+El sistema **Tunomático** está desplegado en una arquitectura de múltiples nodos conectados mediante protocolos web estandarizados. Cada nodo contiene los componentes que le corresponden para garantizar un funcionamiento modular, escalable y mantenible.
+
+---
+
+### 🔹 <<nodo>> Cliente Web
+
+- **Componentes**:
+  - `interfaz.html` – estructura visual del sitio
+  - `app.js` – lógica en el navegador
+  - `styles.css` – estilos y diseño
+- **Conexión**: Comunica con el Servidor de Aplicaciones vía **HTTP**
+- **Rol**: Punto de entrada del usuario para solicitar, cancelar y consultar turnos.
+
+---
+
+### 🔹 <<nodo>> Servidor de Aplicaciones
+
+- **Componentes**:
+  - `ControladorTurnos` → `<<Singleton>>`: centraliza la gestión de turnos.
+  - `Turno` → `<<Prototype>>`: permite clonar turnos fácilmente.
+  - `Agenda` → gestiona disponibilidad horaria.
+  - `Notificación` / `NotificaciónAdapter` → `<<Bridge>>` y `<<Adapter>>`: separan canal de envío e integran APIs externas.
+
+  ---
+
+### 🔹 <<nodo>> Base de Datos
+
+- **Componentes**:
+  - `turnos.db` – turnos registrados
+  - `usuarios.db` – datos de los usuarios
+  - `agenda.db` – horarios disponibles
+- **Acceso**: vía **JDBC** desde el Servidor de Aplicaciones
+- **Rol**: Almacenamiento persistente del sistema.
+
+---
+
+### 🔹 <<nodo>> Servidor REST
+
+- **Componentes expuestos**:
+  - `/API/turnos`
+  - `/API/disponibilidad`
+- **Rol**: Ofrece una interfaz RESTful para la consulta de datos desde aplicaciones externas o internas.
+- **Acceso**: vía **REST API** desde el Servidor de Aplicaciones
+
+---
+
+### 🔹 <<node>> Servidor de Notificaciones
+
+- **Conexión**: vía REST API desde el `NotificaciónAdapter`
+- **Rol**: Sistema externo encargado de enviar notificaciones al usuario, ya sea por correo o llamada.
+
+---
+
+### 🧠 Patrones de Diseño Representados
+
+| Patrón       | Ubicación                         | Propósito                                                                 |
+|--------------|-----------------------------------|--------------------------------------------------------------------------|
+| Singleton    | `ControladorTurnos`               | Una única instancia para controlar lógica de turnos                      |
+| Prototype    | `Turno`                           | Clonación de objetos turno                                               |
+| Adapter      | `NotificaciónAdapter`             | Adaptación con servicios externos de notificación                        |
+| Bridge       | `Notificación`, `Email`, `Llamada`| Separar lógica del tipo de canal utilizado                               |
+
+---
+
+> ✅ **Conclusión**: Este diagrama refleja una arquitectura moderna, profesional y alineada con buenas prácticas de ingeniería de software. La distribución de responsabilidades y el uso correcto de patrones aseguran que el sistema sea robusto, mantenible y fácilmente extensible.
