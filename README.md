@@ -11,7 +11,7 @@ y notifica a los usuarios sobre el estado de sus turnos mediante correo electron
 
 Este sistema ha sido desarrollado aplicando buenas prácticas de diseño orientado a objetos y empleando patrones de diseño software como Singleton, Prototype, Adapter y Bridge, lo que asegura una estructura escalable, mantenible y fácilmente integrable con otros sistemas.
 
-<<imagen>>
+imaaaaaaaaaaagen
 Diagrama de caso de uso
 Descripción y Justificación del Diagrama
 El sistema Tunomático contempla tres actores principales:
