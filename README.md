@@ -32,4 +32,4 @@ El administrador tiene acceso a:
 
 El sistema de notificaciones interactúa mediante el caso de uso "Notificar usuario", el cual también está modelado como una extensión (<<extend>>) del proceso de cancelación, ya que se invoca solo en ciertos escenarios, como al anular un turno.
 
-Este modelo permite reflejar la lógica condicional y reutilizable del sistema, empleando correctamente relaciones <extend> para acciones opcionales y <include> para acciones obligatorias compartidas por múltiples casos de uso.
+Este modelo permite reflejar la lógica condicional y reutilizable del sistema, empleando correctamente relaciones extend para acciones opcionales y include para acciones obligatorias compartidas por múltiples casos de uso.
