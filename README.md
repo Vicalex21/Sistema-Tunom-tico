@@ -1,26 +1,48 @@
 # Sistema-Tunomatico
 
 
-**📌 Descripción General del Sistema**
+## 📌 Descripción General del Sistema
 
-El sistema Tunomatico es una solucion digital orientada a la gestion de turnos para usuarios que requieren atencion en servicios publicos o privados.
-Su objetivo personal es automatizar la asignacion de numeros de atencion, asi facilitando la organizacion y eliminando tiempos de espera presenciales 
+**Tunomatico** es una solucion digital orientada a la gestion de turnos para usuarios que requieren atencion en servicios publicos o privados.
+Su objetivo personal es **automatizar la asignacion de numeros de atencion**, asi facilitando la organizacion y eliminando tiempos de espera presenciales 
 
-A traves de una interfaz, los usuarios podran solicitar un numero de atencion, cancelar el numero y consultar el estado de su solicitud. En segundo plano, el sistema administra la agenda disponible
-y notifica a los usuarios sobre el estado de sus turnos mediante correo electronico o llamada
+A traves de una interfaz, los usuarios pueden:
+- Solicitar un numero de atencion
+- Cancelar el numero 
+- Consultar el estado de su solicitud
 
-Este sistema ha sido desarrollado aplicando buenas prácticas de diseño orientado a objetos y empleando patrones de diseño software como Singleton, Prototype, Adapter y Bridge, lo que asegura una estructura escalable, mantenible y fácilmente integrable con otros sistemas.
+En segundo plano, el sistema administra la agenda disponible y **notifica a los usuarios sobre el estado de sus turnos mediante correo electronico o llamada**
+
+Este sistema ha sido desarrollado aplicando buenas prácticas de diseño orientado a objetos y empleando patrones de diseño software como:
+- Singleton
+- Prototype
+- Adapter 
+- Bridge
+
+Esto asegura una estructura escalable, mantenible y fácilmente integrable con otros sistemas.
+
+---
 
 aqui va la imagen
 
-Diagrama de caso de uso
-Descripción y Justificación del Diagrama
-El sistema Tunomático contempla tres actores principales:
+## 📌 Diagrama de Casos de Uso
+
+> 📷 *[Aquí debe insertarse la imagen del diagrama de casos de uso]*
+
+---
+
+## 🧠 Descripción y Justificación del Diagrama de Casos de Uso
+
+### 👥 Actores principales
+
     - Usuario: Interactúa con la plataforma para gestionar su atención.
     - Administrador: Mantiene la agenda de disponibilidad y gestiona los turnos existentes.
     - Sistema de Notificaciones: Un sistema externo encargado de enviar notificaciones automáticas a los usuarios.
 
-El usuario puede:
+--- 
+
+### 🧑 Funcionalidades del Usuario
+
     - Solicitar un turno, que es la acción principal del sistema.
     - Ver el estado de su turno, para confirmar si sigue vigente o ha sido modificado.
     - Cancelar un turno, lo cual está modelado como una extensión (<<extend>>) del caso "Solicitar turno", ya que cancelar es una opción posterior o alternativa dentro del flujo de turnos.
