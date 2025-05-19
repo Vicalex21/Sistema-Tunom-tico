@@ -115,3 +115,5 @@ Esto permite agregar nuevos tipos de notificación sin modificar la lógica cent
 
 ---
 
+> ✅ **Conclusión**: El diseño del sistema refleja una arquitectura profesional, reutilizable y mantenible, con uso efectivo de patrones de diseño clásicos.
+
