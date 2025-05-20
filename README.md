@@ -3,15 +3,15 @@
 
 ## 📌 Descripción General del Sistema
 
-**Tunomatico** es una solucion digital orientada a la gestion de turnos para usuarios que requieren atencion en servicios publicos o privados.
-Su objetivo personal es **automatizar la asignacion de numeros de atencion**, asi facilitando la organizacion y eliminando tiempos de espera presenciales.
+**Tunomático** es una solución digital que permite a personas sacar turnos fácilmente en lugares donde se necesita atención, como centros médicos o instituciones públicas, asi facilitando la organizacion y eliminando tiempos de espera presenciales.
+
 
 A traves de una interfaz, los usuarios pueden:
 - Solicitar un numero de atencion
 - Cancelar el numero 
 - Consultar el estado de su solicitud
 
-En segundo plano, el sistema administra la agenda disponible y **notifica a los usuarios sobre el estado de sus turnos mediante correo electronico o llamada**
+Mientras tanto, el sistema se encarga de mantener actualizada la agenda y de **enviar notificaciones al usuario**, ya sea por correo o por llamada, cuando algo cambia.
 
 Este sistema ha sido desarrollado aplicando diseño orientado a objetos y empleando patrones de diseño software como:
 - Singleton
@@ -33,19 +33,19 @@ Esto asegura una estructura escalable, mantenible y fácilmente integrable con o
 
 ## 🧠 Descripción y Justificación del Diagrama de Casos de Uso
 
-### 👥 Actores principales
-
-    - Usuario: Interactúa con la plataforma para gestionar su atención.
-    - Administrador: Mantiene la disponibilidad y gestiona los turnos existentes.
-    - Sistema de Notificaciones: Un sistema externo encargado de enviar notificaciones a los usuarios.
+### 👥 Actores del sistema:
+    - **Usuario**: usa la plataforma para pedir y revisar turnos.
+    - **Administrador**: se encarga de mantener actualizada la agenda de turnos.
+    - **Sistema de Notificaciones**: servicio externo que envía mensajes automáticos.
 
 --- 
 
 ### 🧑 Funcionalidades del Usuario
 
-    - Solicitar un turno, que es la acción principal del sistema.
-    - Ver el estado de su turno, para confirmar si sigue vigente o ha sido modificado.
-    - Cancelar un turno, lo cual está modelado como una extensión (<<extend>>) del caso "Solicitar turno", ya que cancelar es una opción posterior dentro del flujo de turnos.
+      - **Pedir un turno**, que es la función principal.
+    - **Ver el estado de su turno** (si sigue agendado, si fue cancelado, etc.).
+    - **Cancelar un turno**, acción que puede llevar a enviar una **notificación automática** al usuario. Por eso está conectada con “Notificar usuario”.
+
     
 📌 El caso **"Cancelar turno"** extiende a **"Notificar usuario"**, indicando que al cancelar un turno, se puede enviar automáticamente una notificación al usuario.
 
@@ -63,8 +63,7 @@ El administrador tiene acceso a:
 
 ### 🔔 Sistema de Notificaciones
 
-- El sistema externo participa en el caso de uso **"Notificar usuario"**  
-- Este caso está modelado como una **extensión** (`<<extend>>`) del proceso de cancelación, ya que solo se invoca en ciertos escenarios (por ejemplo, al anular un turno)
+    - Solo entra en acción si se **cancela un turno**, para **avisar automáticamente** al usuario por correo o llamada.
 
 ---
 
@@ -91,33 +90,31 @@ Las clases más importantes representadas son:
 
 - **Usuario**: contiene los datos básicos del usuario que solicita un turno.
 - **Turno**: representa un número de atención asociado a un usuario.
-- **Agenda**: mantiene la disponibilidad horaria del sistema.
+- **Agenda**: gestiona la disponibilidad de horarios.
 - **ControladorTurnos**: clase central que administra la creación y cancelación de turnos.
-- **Notificación**: clase abstracta para el envío de notificaciones.
-- **NotificaciónEmail / NotificaciónLlamada**: implementaciones concretas del sistema de notificación.
-- **NotificaciónAdapter**: adapta servicios externos de notificación.
+- **Notificación**: define cómo se debe notificar a un usuario.
+- **NotificaciónEmail / NotificaciónLlamada**: formas específicas de enviar notificaciones.
+- **NotificaciónAdapter**: se usa para conectar con servicios externos (como una API).
 
 ---
 
 ### 🔧 Justificación de Patrones Aplicados
 
 #### 🔹 `Singleton` – Clase ControladorTurnos
-Se aplica para garantizar que exista **una única instancia** que gestione toda la lógica de turnos del sistema.  
-Esto evita duplicación de lógica.
+asegura que solo exista una única instancia que controle los turnos.
 
 #### 🔹 `Prototype` – Clase Turno
 El patrón Prototype permite **clonar turnos existentes**, útil si un usuario desea reprogramar o repetir un número previamente asignado.
 
 #### 🔹 `Adapter` – Clase NotificaciónAdapter
-Este adaptador sirve como **puente entre el sistema interno y un servicio externo** (como una API de llamadas o correos).  
-Permite integrar funcionalidades externas.
+adapta el sistema a servicios externos, como el envío de correos o llamadas.
 
 #### 🔹 `Bridge` – Clases Notificación / NotificaciónEmail / NotificaciónLlamada
-Se utiliza para **desacoplar la abstracción de la notificación** (`Notificación`) de sus implementaciones (`Email`, `Llamada`).  
+permite cambiar o agregar tipos de notificación sin afectar el resto del sistema.
 
 ---
 
-> ✅ **Conclusión**: El diseño del sistema refleja una arquitectura profesional y mantenible, con uso efectivo de patrones de diseño clásicos.
+> ✅ **Conclusión**: Esta estructura hace que el sistema sea claro, bien dividido en funciones, y fácil de mantener o ampliar más adelante.
 
 
 ---
@@ -180,13 +177,32 @@ El sistema **Tunomático** está desplegado en una arquitectura de múltiples no
 
 ### 🧠 Patrones de Diseño Representados
 
-| Patrón       | Ubicación                         | Propósito                                                                 |
+| Patrón       | Ubicación                         | Propósito                                                                |
 |--------------|-----------------------------------|--------------------------------------------------------------------------|
-| Singleton    | `ControladorTurnos`               | Una única instancia para controlar lógica de turnos                      |
-| Prototype    | `Turno`                           | Clonación de objetos turno                                               |
-| Adapter      | `NotificaciónAdapter`             | Adaptación con servicios externos de notificación                        |
+| Singleton    | `ControladorTurnos`               | Asegura un único controlador global de turnos                            |
+| Prototype    | `Turno`                           | Permite clonar turnos fácilmente                                         |
+| Adapter      | `NotificaciónAdapter`             | Conecta el sistema con APIs externas de notificación                     |
 | Bridge       | `Notificación`, `Email`, `Llamada`| Separar lógica del tipo de canal utilizado                               |
 
 ---
 
-> ✅ **Conclusión**: Este diagrama refleja una arquitectura alineada con buenas prácticas de ingeniería de software. La distribución de responsabilidades y el uso correcto de patrones aseguran que el sistema sea robusto, mantenible y fácilmente extensible.
+> ✅ **Conclusión**: Este diagrama muestra una estructura bien pensada y organizada. Cada parte del sistema cumple un rol claro, y el uso de patrones de diseño ayuda a que el sistema sea más fácil de entender, mantener y mejorar en el futuro.
+
+---
+
+## 💡 Reflexiones Finales
+
+El desarrollo del sistema **Tunomático** permitió aplicar de manera práctica los principios de diseño orientado a objetos, junto con la integración de patrones de diseño clásicos como `Singleton`, `Prototype`, `Adapter` y `Bridge`.
+
+Durante el proceso de modelado se vio distintas etapas fundamentales del sistema:
+
+    - Se identificaron claramente los actores y funciones del sistema mediante el diagrama de casos de uso.
+    - Se diseñaron clases bien estructuradas y con responsabilidades definidas en el diagrama de clases.
+    - Se representó cómo el sistema se instala y se comunica en la vida real con el diagrama de implementación.
+
+Aplicar patrones como `Singleton`, `Prototype`, `Adapter` y `Bridge` no solo ayudó a mejorar el diseño, sino también a pensar en cómo hacer que el sistema sea fácil de mantener, escalar y entender por otros desarrolladores.
+
+
+Además, el uso de herramientas UML para representar gráficamente las decisiones permitió visualizar mejor las conexiones entre capas del sistema y evaluar de forma anticipada la calidad del diseño.
+
+
