@@ -34,17 +34,17 @@ Esto asegura una estructura escalable, mantenible y fácilmente integrable con o
 ## 🧠 Descripción y Justificación del Diagrama de Casos de Uso
 
 ### 👥 Actores del sistema:
-    - **Usuario**: usa la plataforma para pedir y revisar turnos.
-    - **Administrador**: se encarga de mantener actualizada la agenda de turnos.
-    - **Sistema de Notificaciones**: servicio externo que envía mensajes automáticos.
+    - Usuario: usa la plataforma para pedir y revisar turnos.
+    - Administrador: se encarga de mantener actualizada la agenda de turnos.
+    - Sistema de Notificaciones: servicio externo que envía mensajes automáticos.
 
 --- 
 
 ### 🧑 Funcionalidades del Usuario
 
-      - **Pedir un turno**, que es la función principal.
-    - **Ver el estado de su turno** (si sigue agendado, si fue cancelado, etc.).
-    - **Cancelar un turno**, acción que puede llevar a enviar una **notificación automática** al usuario. Por eso está conectada con “Notificar usuario”.
+    - Pedir un turno, que es la función principal.
+    - Ver el estado de su turno (si sigue agendado, si fue cancelado, etc.).
+    - Cancelar un turno, acción que puede llevar a enviar una notificación automática al usuario. Por eso está conectada con “Notificar usuario”.
 
     
 📌 El caso **"Cancelar turno"** extiende a **"Notificar usuario"**, indicando que al cancelar un turno, se puede enviar automáticamente una notificación al usuario.
@@ -114,7 +114,7 @@ permite cambiar o agregar tipos de notificación sin afectar el resto del sistem
 
 ---
 
-> ✅ **Conclusión**: Esta estructura hace que el sistema sea claro, bien dividido en funciones, y fácil de mantener o ampliar más adelante.
+✅ **Conclusión**: Esta estructura hace que el sistema sea claro, bien dividido en funciones, y fácil de mantener o ampliar más adelante.
 
 
 ---
@@ -132,7 +132,7 @@ El sistema **Tunomático** está desplegado en una arquitectura de múltiples no
 
 ---
 
-### 🔹 <<nodo>> Cliente Web
+### 🔹 nodo Cliente Web
 
 - **Componentes**:
   - `interfaz.html` – estructura visual del sitio
@@ -141,7 +141,7 @@ El sistema **Tunomático** está desplegado en una arquitectura de múltiples no
 
 ---
 
-### 🔹 <<nodo>> Servidor de Aplicaciones
+### 🔹 nodo Servidor de Aplicaciones
 
 - **Componentes**:
   - `ControladorTurnos` → `<<Singleton>>`: centraliza la gestión de turnos.
@@ -151,7 +151,7 @@ El sistema **Tunomático** está desplegado en una arquitectura de múltiples no
 
   ---
 
-### 🔹 <<nodo>> Base de Datos
+### 🔹 nodo Base de Datos
 
 - **Componentes**:
   - `turnos.db` – turnos registrados
@@ -160,15 +160,15 @@ El sistema **Tunomático** está desplegado en una arquitectura de múltiples no
 
 ---
 
-### 🔹 <<nodo>> Servidor REST
+### 🔹 nodo Servidor REST
 
-- **Componentes expuestos**:
-  - `/API/turnos`
-  - `/API/disponibilidad`
+- **Componentes**:
+  - `API/turnos`
+  - `API/disponibilidad`
 
 ---
 
-### 🔹 <<nodo>> Servidor de Notificaciones
+### 🔹 nodo Servidor de Notificaciones
 
 - **Conexión**: vía REST API desde el `NotificaciónAdapter`
 - Sistema externo encargado de enviar notificaciones al usuario, ya sea por correo o llamada.
@@ -186,7 +186,7 @@ El sistema **Tunomático** está desplegado en una arquitectura de múltiples no
 
 ---
 
-> ✅ **Conclusión**: Este diagrama muestra una estructura bien pensada y organizada. Cada parte del sistema cumple un rol claro, y el uso de patrones de diseño ayuda a que el sistema sea más fácil de entender, mantener y mejorar en el futuro.
+✅ **Conclusión**: Este diagrama muestra una estructura bien pensada y organizada. Cada parte del sistema cumple un rol claro, y el uso de patrones de diseño ayuda a que el sistema sea más fácil de entender, mantener y mejorar en el futuro.
 
 ---
 
