@@ -4,7 +4,7 @@
 ## 📌 Descripción General del Sistema
 
 **Tunomatico** es una solucion digital orientada a la gestion de turnos para usuarios que requieren atencion en servicios publicos o privados.
-Su objetivo personal es **automatizar la asignacion de numeros de atencion**, asi facilitando la organizacion y eliminando tiempos de espera presenciales 
+Su objetivo personal es **automatizar la asignacion de numeros de atencion**, asi facilitando la organizacion y eliminando tiempos de espera presenciales.
 
 A traves de una interfaz, los usuarios pueden:
 - Solicitar un numero de atencion
@@ -13,7 +13,7 @@ A traves de una interfaz, los usuarios pueden:
 
 En segundo plano, el sistema administra la agenda disponible y **notifica a los usuarios sobre el estado de sus turnos mediante correo electronico o llamada**
 
-Este sistema ha sido desarrollado aplicando buenas prácticas de diseño orientado a objetos y empleando patrones de diseño software como:
+Este sistema ha sido desarrollado aplicando diseño orientado a objetos y empleando patrones de diseño software como:
 - Singleton
 - Prototype
 - Adapter 
@@ -30,13 +30,14 @@ Esto asegura una estructura escalable, mantenible y fácilmente integrable con o
 
 
 ---
+
 ## 🧠 Descripción y Justificación del Diagrama de Casos de Uso
 
 ### 👥 Actores principales
 
     - Usuario: Interactúa con la plataforma para gestionar su atención.
-    - Administrador: Mantiene la agenda de disponibilidad y gestiona los turnos existentes.
-    - Sistema de Notificaciones: Un sistema externo encargado de enviar notificaciones automáticas a los usuarios.
+    - Administrador: Mantiene la disponibilidad y gestiona los turnos existentes.
+    - Sistema de Notificaciones: Un sistema externo encargado de enviar notificaciones a los usuarios.
 
 --- 
 
@@ -44,7 +45,7 @@ Esto asegura una estructura escalable, mantenible y fácilmente integrable con o
 
     - Solicitar un turno, que es la acción principal del sistema.
     - Ver el estado de su turno, para confirmar si sigue vigente o ha sido modificado.
-    - Cancelar un turno, lo cual está modelado como una extensión (<<extend>>) del caso "Solicitar turno", ya que cancelar es una opción posterior o alternativa dentro del flujo de turnos.
+    - Cancelar un turno, lo cual está modelado como una extensión (<<extend>>) del caso "Solicitar turno", ya que cancelar es una opción posterior dentro del flujo de turnos.
     
 📌 El caso **"Cancelar turno"** extiende a **"Notificar usuario"**, indicando que al cancelar un turno, se puede enviar automáticamente una notificación al usuario.
 
@@ -58,6 +59,7 @@ El administrador tiene acceso a:
     - Este caso incluye (include) a "Ver todos los turnos", ya que para gestionar la agenda, el administrador necesita consultar los turnos previamente asignados.
 
 ---
+
 
 ### 🔔 Sistema de Notificaciones
 
@@ -101,33 +103,35 @@ Las clases más importantes representadas son:
 
 #### 🔹 `Singleton` – Clase ControladorTurnos
 Se aplica para garantizar que exista **una única instancia** que gestione toda la lógica de turnos del sistema.  
-Esto evita duplicación de lógica y asegura consistencia global.
+Esto evita duplicación de lógica.
 
 #### 🔹 `Prototype` – Clase Turno
 El patrón Prototype permite **clonar turnos existentes**, útil si un usuario desea reprogramar o repetir un número previamente asignado.
 
 #### 🔹 `Adapter` – Clase NotificaciónAdapter
 Este adaptador sirve como **puente entre el sistema interno y un servicio externo** (como una API de llamadas o correos).  
-Permite integrar funcionalidades externas sin acoplarse directamente a su implementación.
+Permite integrar funcionalidades externas.
 
 #### 🔹 `Bridge` – Clases Notificación / NotificaciónEmail / NotificaciónLlamada
 Se utiliza para **desacoplar la abstracción de la notificación** (`Notificación`) de sus implementaciones (`Email`, `Llamada`).  
-Esto permite agregar nuevos tipos de notificación sin modificar la lógica central del sistema.
 
 ---
 
-> ✅ **Conclusión**: El diseño del sistema refleja una arquitectura profesional, reutilizable y mantenible, con uso efectivo de patrones de diseño clásicos.
+> ✅ **Conclusión**: El diseño del sistema refleja una arquitectura profesional y mantenible, con uso efectivo de patrones de diseño clásicos.
+
+
+---
+
 
 ## 🏗️ Diagrama de Implementación UML
 
-> 🖼️ **Aquí debes insertar la imagen final del diagrama de implementación**  
-> *(Ejemplo: `diagrama_implementacion_final.png`)*
+![Diagrama de implementacion drawio](https://github.com/user-attachments/assets/c889d3c5-3327-430e-98a1-e605d00e3f25)
 
 ---
 
 ### 🧱 Arquitectura Física del Sistema
 
-El sistema **Tunomático** está desplegado en una arquitectura de múltiples nodos conectados mediante protocolos web estandarizados. Cada nodo contiene los componentes que le corresponden para garantizar un funcionamiento modular, escalable y mantenible.
+El sistema **Tunomático** está desplegado en una arquitectura de múltiples nodos conectados entre si. Cada nodo contiene los componentes que le corresponden para garantizar un funcionamiento modular, escalable y mantenible.
 
 ---
 
@@ -137,8 +141,6 @@ El sistema **Tunomático** está desplegado en una arquitectura de múltiples no
   - `interfaz.html` – estructura visual del sitio
   - `app.js` – lógica en el navegador
   - `styles.css` – estilos y diseño
-- **Conexión**: Comunica con el Servidor de Aplicaciones vía **HTTP**
-- **Rol**: Punto de entrada del usuario para solicitar, cancelar y consultar turnos.
 
 ---
 
@@ -158,8 +160,6 @@ El sistema **Tunomático** está desplegado en una arquitectura de múltiples no
   - `turnos.db` – turnos registrados
   - `usuarios.db` – datos de los usuarios
   - `agenda.db` – horarios disponibles
-- **Acceso**: vía **JDBC** desde el Servidor de Aplicaciones
-- **Rol**: Almacenamiento persistente del sistema.
 
 ---
 
@@ -168,15 +168,13 @@ El sistema **Tunomático** está desplegado en una arquitectura de múltiples no
 - **Componentes expuestos**:
   - `/API/turnos`
   - `/API/disponibilidad`
-- **Rol**: Ofrece una interfaz RESTful para la consulta de datos desde aplicaciones externas o internas.
-- **Acceso**: vía **REST API** desde el Servidor de Aplicaciones
 
 ---
 
-### 🔹 <<node>> Servidor de Notificaciones
+### 🔹 <<nodo>> Servidor de Notificaciones
 
 - **Conexión**: vía REST API desde el `NotificaciónAdapter`
-- **Rol**: Sistema externo encargado de enviar notificaciones al usuario, ya sea por correo o llamada.
+- Sistema externo encargado de enviar notificaciones al usuario, ya sea por correo o llamada.
 
 ---
 
@@ -191,4 +189,4 @@ El sistema **Tunomático** está desplegado en una arquitectura de múltiples no
 
 ---
 
-> ✅ **Conclusión**: Este diagrama refleja una arquitectura moderna, profesional y alineada con buenas prácticas de ingeniería de software. La distribución de responsabilidades y el uso correcto de patrones aseguran que el sistema sea robusto, mantenible y fácilmente extensible.
+> ✅ **Conclusión**: Este diagrama refleja una arquitectura alineada con buenas prácticas de ingeniería de software. La distribución de responsabilidades y el uso correcto de patrones aseguran que el sistema sea robusto, mantenible y fácilmente extensible.
